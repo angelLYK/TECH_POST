@@ -167,7 +167,8 @@ public boolean release() {
 #结论
 netty 有些自带的handler已经帮我们释放了ByteBuf，这种情况下，我们没有必要再手动释放，否则就抛出异常了，如果netty自带的handler没有帮我们释放ByteBuf，那么还是需要手动释放，来增加整体性能。（针对Pool类型的ByteBuf，释放后，直接返回Pool中，Unpooled类型的ByteBuf，手动释放可能防止内存泄漏）
 
-#参考链接
+#参考资料
 * [Reference counted objects](http://netty.io/wiki/reference-counted-objects.html)
 * [Using as a generic library](http://netty.io/wiki/using-as-a-generic-library.html)
+* Netty In Action
 
