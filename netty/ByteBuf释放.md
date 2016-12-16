@@ -96,7 +96,7 @@ try {
 	ReferenceCountUtil.release(buf);
 	buf.release();
 }
-``
+```
 网上检索了下，没有任何线索，老办法直接深入源码，在ByteToMessageDecoder这个类中：
 	
 ```java
