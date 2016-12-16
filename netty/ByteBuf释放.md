@@ -22,10 +22,10 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) {
 	}
 ```
 	
-	需要注意的是：释放ByteBuf必须遵守一定的规则
-	1. 首先必须是InBound类型的handler。
-	2. 必须是最后一个试用ByteBuf的Handler。如果提前释放了ByteBuf，后续的Handler是无法使用数据的。
-	3. Outbound类型的handler没有必要显示释放ByteBuf，因为netty内部自己完成了。
+需要注意的是：释放ByteBuf必须遵守一定的规则
+1. 首先必须是InBound类型的handler。
+2. 必须是最后一个试用ByteBuf的Handler。如果提前释放了ByteBuf，后续的Handler是无法使用数据的。
+3. Outbound类型的handler没有必要显示释放ByteBuf，因为netty内部自己完成了。
 	
 # 本人使用过程中遇到的问题
 
