@@ -68,33 +68,21 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		
-		//set request encoding utf-8
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-    characterEncodingFilter.setEncoding("UTF-8");
-    characterEncodingFilter.setForceEncoding(true);
-
-    FilterRegistration.Dynamic characterEncoding = servletContext.addFilter("characterEncoding", characterEncodingFilter);
-    characterEncoding.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
-
-		
+		characterEncodingFilter.setEncoding("UTF-8");
+		characterEncodingFilter.setForceEncoding(true);
+		FilterRegistration.Dynamic characterEncoding = servletContext.addFilter("characterEncoding", characterEncodingFilter);
+		characterEncoding.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
 		System.setProperty("cloud.rootPath", servletContext.getRealPath("/"));
 		System.out.println(servletContext.getRealPath("/"));
-		
-		// Create the 'root' Spring application context
-    AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-    rootContext.register(RootConfiguration.class);
-
-     // Manage the lifecycle of the root application context
-    servletContext.addListener(new ContextLoaderListener(rootContext));
-
-    // Create the dispatcher servlet's Spring application context
-    AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
-    dispatcherServlet.register(WebConfiguration.class);
-
-    // Register and map the dispatcher servlet
-    ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherServlet));
-    dispatcher.setLoadOnStartup(1);
-    dispatcher.addMapping("/");
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(RootConfiguration.class);
+		servletContext.addListener(new ContextLoaderListener(rootContext));
+		AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
+		dispatcherServlet.register(WebConfiguration.class);
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherServlet));
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("/");
 	}
 
 }
