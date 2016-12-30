@@ -35,7 +35,7 @@
 </filter-mapping> 
 ```
 
-有的小伙伴认为，添加上这个Filter，返回的字符编码不用管了，也会是UTF-8。但是实际情况还真得用惯，返回的字符编码会被springMVC默认的字符编码覆盖。我们看一下CharacterEncodingFilter的javaDoc怎么讲：
+有的小伙伴认为，添加上这个Filter，返回的字符编码不用管了，也会是UTF-8。但是实际情况还真得用管，返回的字符编码会被springMVC默认的字符编码覆盖。我们看一下CharacterEncodingFilter的javaDoc怎么讲：
 
 ```java
 /**
@@ -130,7 +130,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 	}
 }
 
-```java
+```
 
 # 参考链接
 * [How to overwrite StringHttpMessageConverter DEFAULT_CHARSET to use UTF8 in spring 4](http://stackoverflow.com/questions/27606769/how-to-overwrite-stringhttpmessageconverter-default-charset-to-use-utf8-in-sprin)
